@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        input, button { padding: 10px; margin: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <h2>Calculate Time After 9 Hours 30 Minutes</h2>
+    <label>Hours: <input type="number" id="hours" min="0" max="23"></label>
+    <label>Minutes: <input type="number" id="minutes" min="0" max="59"></label>
+    <button onclick="calculateTime()">Calculate</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+        function calculateTime() {
+            let hours = parseInt(document.getElementById("hours").value) || 0;
+            let minutes = parseInt(document.getElementById("minutes").value) || 0;
+
+            let date = new Date();
+            date.setHours(hours);
+            date.setMinutes(minutes);
+
+            // Add 9 hours 30 minutes
+            date.setMinutes(date.getMinutes() + 570);
+
+            // Format hours and minutes
+            let newHours = date.getHours();
+            let newMinutes = date.getMinutes();
+            
+            // Convert to 12-hour format with AM/PM
+            let period = newHours >= 12 ? "PM" : "AM";
+            newHours = newHours % 12 || 12; // Convert 0 to 12 for 12-hour format
+
+            document.getElementById("result").innerText = `Time After 9:30 ➝ ${newHours}:${newMinutes.toString().padStart(2, '0')} ${period}`;
+        }
+    </script>
+
+</body>
+</html>
